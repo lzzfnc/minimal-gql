@@ -1,0 +1,42 @@
+query activeCustomer {
+	activeCustomer {
+		id
+		emailAddress
+	}
+}
+
+mutation login {
+	login(username: "luzzanafrancesco@gmail.com", password: "qwerty", rememberMe: true) {
+		... on CurrentUser {
+			id
+			channels {
+				token
+				code
+			}
+		}
+		... on ErrorResult {
+			message
+		}
+	}
+}
+
+mutation logout {
+	logout {
+		success
+	}
+}
+
+mutation addItem {
+	addItemToOrder(productVariantId: 64, quantity: 1) {
+		... on Order {
+			id
+			total
+			totalQuantity
+			lines {
+				productVariant {
+					name
+				}
+			}
+		}
+	}
+}
